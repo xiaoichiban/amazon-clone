@@ -10,7 +10,6 @@ router.post("/auth/signup", async (req, res) => {
     res.json({
       success: false,
       message: "Please enter email or password",
-      req: req.body,
     });
   } else {
     try {

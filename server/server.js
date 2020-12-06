@@ -32,7 +32,7 @@ Mongoose.connect(
 //Middlewares - middleman between FE and BE
 app.use(cors());
 app.use(morgan("dev"));
-app.unsubscribe(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // require apis
