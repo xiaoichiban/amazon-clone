@@ -1,18 +1,17 @@
 const router = require("express").Router();
 const Category = require("../models/category");
-const { route } = require("./product");
 
-// POST
+// POST request
 router.post("/categories", async (req, res) => {
   try {
-    let category = new Category();
+    const category = new Category();
     category.type = req.body.type;
 
     await category.save();
 
     res.json({
       success: true,
-      message: "Successfully saved category",
+      message: "Successfuly created a new category",
     });
   } catch (err) {
     console.log(err);
@@ -23,7 +22,7 @@ router.post("/categories", async (req, res) => {
   }
 });
 
-// GET
+// GET request
 router.get("/categories", async (req, res) => {
   try {
     let categories = await Category.find();
@@ -32,7 +31,7 @@ router.get("/categories", async (req, res) => {
       success: true,
       categories: categories,
     });
-  } catch {
+  } catch (err) {
     res.status(500).json({
       success: false,
       message: err.message,
