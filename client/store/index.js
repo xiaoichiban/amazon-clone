@@ -16,7 +16,7 @@ export const actions = {
     if (!cartProduct) {
       commit("pushProductToCart", product);
     } else {
-      commit("incrementProductQty", product);
+      commit("incrementProductQty", cartProduct);
     }
 
     commit("incrementCartLength");
@@ -48,5 +48,16 @@ export const mutations = {
 export const getters = {
   getCartLength(state) {
     return state.cartLength;
+  },
+  getCart(state) {
+    return state.cart;
+  },
+  getCartTotalPrice(state) {
+    let total = 0;
+    state.cart.map(product => {
+      total += product.price * product.quantity;
+    });
+
+    return total;
   }
 };
