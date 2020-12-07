@@ -88,7 +88,11 @@
                             &nbsp;
                             <!-- Delete button -->
                             <span class="a-size-small">
-                              <a href="#">Delete</a>
+                              <a
+                                href="#"
+                                @click="onDeleteProduct($event, product)"
+                                >Delete</a
+                              >
                             </span>
                             &nbsp; &nbsp;
                           </div>
@@ -248,6 +252,9 @@ export default {
       } else {
         return false;
       }
+    },
+    onDeleteProduct(event, product) {
+      this.$store.commit("removeProduct", product);
     }
   }
 };
