@@ -298,7 +298,10 @@
                 </div>
 
                 <div class="a-section">
-                  <div class="a-button-stack">
+                  <div
+                    class="a-button-stack"
+                    @click="addProductToCart(product)"
+                  >
                     <span
                       class="a-spacing-small a-button-primary a-button-icon"
                     >
@@ -415,7 +418,9 @@
     </div>
   </main>
 </template>
+
 <script>
+import { mapActions } from "vuex";
 import ReviewSection from "~/components/ReviewSection";
 export default {
   components: {
@@ -436,6 +441,9 @@ export default {
     } catch (err) {
       console.log(err);
     }
+  },
+  methods: {
+    ...mapActions(["addProductToCart"])
   }
 };
 </script>
