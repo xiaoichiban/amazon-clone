@@ -97,7 +97,41 @@
                 </a>
                 (Author)
               </div>
-              <div class="reviewGroup"></div>
+              <div class="reviewGroup">
+                <no-ssr>
+                  <star-rating
+                    :rating="product.averageRating"
+                    :show-rating="false"
+                    :glow="1"
+                    :border-width="1"
+                    :rounded-corners="true"
+                    :read-only="true"
+                    :star-size="18"
+                    :star-points="[
+                      23,
+                      2,
+                      14,
+                      17,
+                      0,
+                      19,
+                      10,
+                      34,
+                      7,
+                      50,
+                      23,
+                      43,
+                      38,
+                      50,
+                      36,
+                      34,
+                      46,
+                      19,
+                      31,
+                      17
+                    ]"
+                  ></star-rating>
+                </no-ssr>
+              </div>
               <hr style="margin-top: 10px;" />
               <!-- A tags Dummy Data -->
               <div class="mediaMatrix">
@@ -375,18 +409,29 @@
             </div>
           </div>
         </div>
+
+        <ReviewSection :product="product" :reviews="reviews" />
       </div>
     </div>
   </main>
 </template>
 <script>
+import ReviewSection from "~/components/ReviewSection";
 export default {
+  components: {
+    ReviewSection
+  },
   async asyncData({ $axios, params }) {
     try {
-      let response = await $axios.$get(`/api/products/${params.id}`);
-      console.log(response);
+      let singleProduct = $axios.$get(`/api/products/${params.id}`);
+      let manyReviews = $axios.$get(`/api/reviews/${params.id}`);
+      const [productResponse, reviewsResponse] = await Promise.all([
+        singleProduct,
+        manyReviews
+      ]);
       return {
-        product: response.product
+        product: productResponse.product,
+        reviews: reviewsResponse.reviews
       };
     } catch (err) {
       console.log(err);
