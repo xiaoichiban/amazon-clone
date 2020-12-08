@@ -36,11 +36,13 @@
           autocomplete="off"
           required="required"
           class="sbx-amazon__input"
+          v-model="query"
         />
         <button
           type="submit"
           title="Submit your search query."
           class="sbx-amazon__submit"
+          @click="onSearch"
         >
           <svg role="img" aria-label="Search">
             <use xlink:href="#sbx-icon-search-11" />
@@ -59,3 +61,21 @@
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      query: ""
+    };
+  },
+  methods: {
+    onSearch() {
+      this.$router.push({
+        path: "/search",
+        query: { title: this.query }
+      });
+    }
+  }
+};
+</script>
