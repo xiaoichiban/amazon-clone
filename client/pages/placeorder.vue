@@ -422,6 +422,9 @@ export default {
       let response = await $axios.$post("/api/shipment", {
         shipment: "normal"
       });
+      //console.log("In shipment initial call");
+      //console.log(response.shipment.price);
+      //console.log(response.shipment.estimated);
       store.commit("setShipping", {
         price: response.shipment.price,
         estimatedDelivery: response.shipment.estimated
